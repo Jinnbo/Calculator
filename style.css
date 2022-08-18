@@ -169,5 +169,18 @@ body{
 .plus:hover{
     filter: brightness(95%);
     cursor: pointer;
+    transform: scale(1.1);
 }
 
+.result{
+    margin-left: auto;
+    margin-right:20px;
+    margin-top: auto;
+    margin-bottom: 10px;
+
+    font-size: 40px;
+    font-weight: bold;
+    font-family: Roboto;
+    color: rgb(26,60,95);
+
+}
