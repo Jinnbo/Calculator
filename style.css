@@ -1,0 +1,173 @@
+body{
+    background-color: rgb(77,138,200);
+}
+
+.container{
+    display: flex;
+
+    flex-direction: column;
+    
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+
+    width: 350px;
+    height: 530px;
+
+    background-color: rgb(235,245,255);
+    border-radius: 20px;
+}
+
+.display{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 35px;
+    
+    display: flex;
+    width: 300px;
+    height: 100px;
+
+    background-color: rgb(204,229,255);
+    border-radius: 15px;
+
+}
+
+
+
+.row1,
+.row2,
+.row3,
+.row4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    margin-top: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+
+    column-gap: 10px;
+}
+
+.row5{
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+
+.AC,
+.plusMinus,
+.percent,
+.divide,
+.multiply,
+.minus,
+.plus{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: bold;
+    font-family: 'Roboto';
+    color: rgb(74, 149, 223);
+    font-size: 25px;
+
+    padding: 10px;
+
+    border-radius: 10px;
+    background-color: rgb(162,208,250);
+}
+
+
+
+.seven,
+.eight,
+.nine,
+.four,
+.five,
+.six,
+.one,
+.two,
+.three,
+.one{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+    font-family: 'Roboto';
+    color: rgb(74, 149, 223);
+    font-size: 25px;
+    padding: 18px;
+    border-radius: 10px;
+    background-color: rgb(204,229,255);
+}
+
+.zero{
+    font-weight: bold;
+    font-family: 'Roboto';
+    color: rgb(74, 149, 223);
+    font-size: 25px;
+    padding: 18px;
+    margin-right: 2px;
+    border-radius: 10px;
+    background-color: rgb(204,229,255);
+}
+
+.decimal{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+    font-family: 'Roboto';
+    color: rgb(74, 149, 223);
+    font-size: 25px;
+    padding-left: 23px;
+    padding-right: 38px;
+    border-radius: 10px;
+    background-color: rgb(204,229,255);
+}
+
+.equal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+    font-family: 'Roboto';
+    color: rgb(74, 149, 223);
+    font-size: 25px;
+    padding-left: 29px;
+    padding-right: 24px;
+    border-radius: 10px;
+    background-color: rgb(162,208,250);
+}
+
+.seven:hover,
+.eight:hover,
+.nine:hover,
+.four:hover,
+.five:hover,
+.six:hover,
+.one:hover,
+.two:hover,
+.three:hover,
+.one:hover,
+.zero:hover,
+.decimal:hover,
+.equal:hover,
+.AC:hover,
+.plusMinus:hover,
+.percent:hover,
+.divide:hover,
+.multiply:hover,
+.minus:hover,
+.plus:hover{
+    filter: brightness(95%);
+    cursor: pointer;
+}
+
