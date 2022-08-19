@@ -7,6 +7,8 @@ const MAXLENGTH = 11;
 const ac = document.getElementById('AC');
 ac.addEventListener("click",clear)
 
+
+
 // Operator Buttons
 const plusMinus = document.getElementById('plusMinus');
 plusMinus.addEventListener("click", ()=> operator('+-'));
@@ -24,11 +26,14 @@ const plus = document.getElementById('plus');
 plus.addEventListener("click", () => operator('+'));
 
 const minus = document.getElementById('minus');
-minus.addEventListener("click", () => operator.minus('-'));
-
+minus.addEventListener("click", () => operator('-'));
 
 const equal = document.getElementById('equal');
+equal.addEventListener("click", () => operator('='));
+
 const result = document.getElementById('result');
+
+let operatorBool = false;
 
 // Number buttons
 const zero = document.getElementById('zero');
@@ -65,9 +70,12 @@ const decimal = document.getElementById('decimal');
 decimal.addEventListener("click", () => showNumber('.'));
 let decimalBool = false;
 
-// Result string
+// Initialize starting strings
 let resultString = "";
-
+let lhs = 0;
+let rhs = "";
+let tempRes = 0;
+let curOperator = "";
 
 function updateString(){
     resultString = result.innerHTML;
@@ -77,21 +85,57 @@ function updateString(){
 // AC button
 function clear(){
     result.innerHTML = "";
+    resultString = ""
+    lhs = 0;
+    rhs = "";
+    tempRes = 0;
+    curOperator = "";
 
     decimalBool = false;
+    operatorBool = false;
+
+    clearStyle();
+    updateString();
 }
 
-// Numbers
+function clearStyle(){
+    plus.style.filter = "brightness(100%)";
+    plus.style.transform = "scale(1)";
+    minus.style.filter = "brightness(100%)";
+    minus.style.transform = "scale(1)";
+    multiply.style.filter = "brightness(100%)";
+    multiply.style.transform = "scale(1)";
+    divide.style.filter = "brightness(100%)";
+    divide.style.transform = "scale(1)";
+}
+
+
+// Display number
 function showNumber(e){
+
+    // If length is less than maxlength
     if (result.innerHTML.length <= MAXLENGTH){
 
         if (e == '.' && decimalBool == false){
+            
+            if (operatorBool == true){
+                result.innerHTML = rhs;
+                rhs += e;
+            }
             result.innerHTML += `${e}`;
             decimalBool = true;
+            
         }
         else if (e != '.'){
+            
+            // if operator pressed
+            if (operatorBool == true){
+                result.innerHTML = rhs;
+                rhs += e;
+            }
+            
             result.innerHTML += `${e}`;
-
+    
         }
 
         updateString();
@@ -100,21 +144,109 @@ function showNumber(e){
 
 function operator(e){
 
-    switch(e){
-        case '+-':
+    if (resultString.length > 0){
 
-            if (result.innerHTML.charAt(0) != '-'){
-                result.innerHTML = '-' + resultString;
-            }
-            else{
+        operatorBool = true;
+
+        switch(e){
+            // Plus Minus
+            case '+-':
+                if (result.innerHTML.charAt(0) != '-') result.innerHTML = '-' + resultString;
+                else result.innerHTML = result.innerHTML.substring(1);
+                
+                updateString();
+                break;
             
-                result.innerHTML = result.innerHTML.substring(1);
-            }
+            // Addition
+            case '+':
+                curOperator = '+';
+                decimalBool = false;
 
+                // Darken addition button
+                plus.style.filter = "brightness(90%)";
+                plus.style.transform = "scale(1.1)";
 
-            updateString();
-            break;
+                // Get lhs
+                lhs = parseFloat(resultString);
+                    
+                // Set resultString to res
+                updateString();
+                break;
+            
+            // Subtraction
+            case '-':
+                curOperator = '-';
+                decimalBool = false;
 
+                minus.style.filter = "brightness(90%)";
+                minus.style.transform = "scale(1.1)";
+                
+                lhs = parseFloat(resultString);
+
+                updateString();
+                break;
+
+            // Multiplication
+            case '*':
+                curOperator = '*';
+                decimalBool = false;
+
+                multiply.style.filter = "brightness(90%)";
+                multiply.style.transform = "scale(1.1)";
+
+                lhs = parseFloat(resultString);
+
+                updateString();
+                break;
+
+            // Division
+            case '/':
+                curOperator = '/';
+                decimalBool = false;
+
+                divide.style.filter = "brightness(90%)";
+                divide.style.transform = "scale(1.1)";
+
+                lhs = parseFloat(resultString);
+
+                updateString();
+                break;
+
+            // Percent
+            case '%':
+                lhs = parseFloat(resultString);
+
+                tempRes = lhs/100;
+                result.innerHTML = tempRes;
+                updateString();
+                break;
+
+            // Equal
+            case '=':
+                
+                rhs = parseFloat(rhs);
+
+                // Edge case- dividing by 0
+
+                if (curOperator == "+") tempRes = lhs+rhs;
+                if (curOperator == "-") tempRes = lhs-rhs;
+                if (curOperator == "*") tempRes = lhs*rhs;
+                if (curOperator == "/") tempRes = lhs/rhs;
+
+                if (tempRes.toString().length > MAXLENGTH){
+                    console.log(tempRes);
+                    tempRes = tempRes.toExponential(2);
+                }
+                
+                result.innerHTML = tempRes;
+                
+                rhs = "";
+
+                clearStyle();
+                updateString();
+                break;
+                
+        }
     }
 
 
