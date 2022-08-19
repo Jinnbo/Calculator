@@ -226,20 +226,18 @@ function operator(e){
                 
                 rhs = parseFloat(rhs);
 
-                // Edge case- dividing by 0
-
                 if (curOperator == "+") tempRes = lhs+rhs;
                 if (curOperator == "-") tempRes = lhs-rhs;
                 if (curOperator == "*") tempRes = lhs*rhs;
                 if (curOperator == "/") tempRes = lhs/rhs;
 
+                // Result is too long
                 if (tempRes.toString().length > MAXLENGTH){
                     console.log(tempRes);
                     tempRes = tempRes.toExponential(2);
                 }
                 
                 result.innerHTML = tempRes;
-                
                 rhs = "";
 
                 clearStyle();
