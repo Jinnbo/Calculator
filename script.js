@@ -32,6 +32,7 @@ const equal = document.getElementById('equal');
 equal.addEventListener("click", () => operator('='));
 
 const result = document.getElementById('result');
+const calculation = document.getElementById('calculation')
 
 let operatorBool = false;
 
@@ -90,6 +91,7 @@ function clear(){
     rhs = "";
     tempRes = 0;
     curOperator = "";
+    calculation.innerHTML = "";
 
     decimalBool = false;
     operatorBool = false;
@@ -168,6 +170,9 @@ function operator(e){
 
                 // Get lhs
                 lhs = parseFloat(resultString);
+
+                calculation.innerHTML = lhs + ' + ';
+
                     
                 // Set resultString to res
                 updateString();
@@ -183,6 +188,8 @@ function operator(e){
                 
                 lhs = parseFloat(resultString);
 
+                calculation.innerHTML = lhs + ' - ';
+
                 updateString();
                 break;
 
@@ -196,6 +203,8 @@ function operator(e){
 
                 lhs = parseFloat(resultString);
 
+                calculation.innerHTML = lhs + ' x ';
+
                 updateString();
                 break;
 
@@ -208,6 +217,8 @@ function operator(e){
                 divide.style.transform = "scale(1.1)";
 
                 lhs = parseFloat(resultString);
+
+                calculation.innerHTML = lhs + ' ÷ ';
 
                 updateString();
                 break;
@@ -237,6 +248,8 @@ function operator(e){
                     tempRes = tempRes.toExponential(2);
                 }
                 
+
+                calculation.innerHTML += rhs;
                 result.innerHTML = tempRes;
                 rhs = "";
 
